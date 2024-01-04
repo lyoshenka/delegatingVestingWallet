@@ -13,6 +13,7 @@ import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 // import { IVotes } from "@openzeppelin/contracts/governance/utils/IVotes.sol";
 
 import {Revokable} from "./Revokable.sol";
+import {OwnerSignable} from "./OwnerSignable.sol";
 
 /**
  * @dev Interface for gnosis DelegateRegistry used by snapshot
@@ -33,8 +34,9 @@ interface IDelegation {
  * - acceleration of vesting
  * - revocation of unvested ether and tokens
  * - delegating tokens for voting on proposals (e.g. on snapshot)
+ * - allowing beneficiary to sign messages on behalf of the wallet
  */
-contract DelegatingVestingWallet is VestingWallet, Revokable {
+contract DelegatingVestingWallet is VestingWallet, Revokable, OwnerSignable {
     event EtherRevoked(uint256 amount);
     event ERC20Revoked(address indexed token, uint256 amount);
     event Accelerated();
